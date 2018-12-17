@@ -1,6 +1,8 @@
 module.exports = {
-    baseUrl: process.env.NODE_ENV === 'production'
-      ? '/HosannaCalculator/'
-      : '/'
+    //baseUrl: process.env.NODE_ENV === 'production'
+    //  ? '/'
+    //  : '/',
 
+    outputDir: '../docs/',
+    assetsDir: './',
   }
