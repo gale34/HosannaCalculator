@@ -5,18 +5,22 @@
 </template>
 
 <script>
+function Member (grade, count) {
+  this.grade = grade;
+  this.count = count;
+}
 
 export default {
   data() {
     return {};
   },
   methods: {
-    Member (grade, count) {
-      this.grade = grade;
-      this.count = count;
-    },
+    //Member (grade, count) {
+    //  this.grade = grade;
+    //  this.count = count;
+    //},
     addMember() {
-      const newMember = new this.Member(0,0);
+      const newMember = new Member(0, 0);
       this.$store.commit("addMember", newMember);
     }
   }
