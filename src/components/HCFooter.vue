@@ -35,13 +35,13 @@ export default {
 
       let result;
       if (this.isLimitUsed) {
-        result = this.calculateWithLimit(
+        result = this.calculateRecur(this.memberList, this.total, this.limit);
+      } else {
+        result = this.calculateRecur(
           this.memberList,
           this.total,
-          this.limit
+          Number.MAX_SAFE_INTEGER
         );
-      } else {
-        result = this.calculateWithoutLimit(this.memberList, this.total);
       }
 
       if (result === "OVERFLOW. LIMIT_IS_NOT_VALID")
@@ -59,14 +59,14 @@ export default {
       } else {
         alert(
           "학년 마이너스 " +
-            result.plus +
+            result.plus * -1 +
             "\n남는 잔액은 " +
             result.balance +
             "입니다."
         );
       }
     },
-    calculateWithLimit(memberList, total, limit) {
+    calculateRecur(memberList, total, limit) {
       memberList.sort(this.compare);
       let subTotal = this.getSubTotal(memberList, limit);
       let numOfPerson = this.getNumOfPerson(memberList);
@@ -93,13 +93,9 @@ export default {
             balance: expectBalance
           };
         } else {
-          let overflow = this.reBasePlusMemberList(
-            memberList,
-            limit,
-            expectPlus
-          );
+          let overflow = this.reBasePlusMember(memberList, limit, expectPlus);
           total -= overflow;
-          //this.calculateWithLimit(memberList, total, limit);
+          return this.calculateRecur(memberList, total, limit);
         }
       } else if (margin == 0) {
         return {
@@ -113,59 +109,14 @@ export default {
 
         if ((this.getMinGrade(memberList) - expectMinus) * this.payUnit >= 0) {
           return {
-            plus: expectMinus,
+            plus: expectMinus * -1,
             balance: expectBalance
           };
         } else {
-          let underflow = this.reBaseMinusMemberList(
-            memberList,
-            limit,
-            expectMinus
-          );
+          let underflow = this.reBaseMinusMember(memberList, expectMinus);
           total -= underflow;
-          this.calculateWithLimit(memberList, total, limit);
-        }
-      }
-    },
-    calculateWithoutLimit(memberList, total) {
-      memberList.sort(this.compare);
 
-      let subTotal = 0;
-      memberList.forEach(element => {
-        subTotal += element.grade * element.count * this.payUnit;
-      });
-
-      let numOfPerson = memberList.length;
-      let plusUnit = numOfPerson * this.payUnit;
-      let margin = total - subTotal;
-
-      if (margin > 0) {
-        let expectBalance = plusUnit - (margin % plusUnit);
-        let expectPlus = (margin + expectBalance) / plusUnit;
-
-        return {
-          plus: expectPlus,
-          balance: expectBalance
-        };
-      } else if (margin == 0) {
-        return {
-          plus: 0,
-          balance: 0
-        };
-      } else {
-        margin = Math.abs(margin);
-        let expectBalance = margin % plusUnit;
-        let expectMinus = (margin - expectBalance) / plusUnit;
-
-        if ((this.getMinGrade(memberList) - expectMinus) * this.payUnit >= 0) {
-          return {
-            plus: expectMinus,
-            balance: expectBalance
-          };
-        } else {
-          let underflow = this.reBaseMinusMemberList(memberList, expectMinus);
-          total -= underflow;
-          this.calculateWithoutLimit(memberList, total);
+          return this.calculateRecur(memberList, total, limit);
         }
       }
     },
@@ -192,33 +143,35 @@ export default {
       return result;
     },
     getMaxGrade(memberList) {
-      let max = -1;
+      let max = Number.MIN_SAFE_INTEGER;
       memberList.forEach(element => {
         max = Math.max(max, element.grade);
       });
       return max;
     },
     getMinGrade(memberList) {
-      let min = 9999999;
+      let min = Number.MAX_SAFE_INTEGER;
       memberList.forEach(element => {
         min = Math.min(min, element.grade);
       });
       return min;
     },
-    reBasePlusMemberList(memberList, limit, expectPlus) {
+    reBasePlusMember(memberList, limit, expectPlus) {
       let i;
+      let result = 0;
       let limitedPersons = 0;
       for (i = memberList.length - 1; i >= 0; i--) {
-        if ((memberList[i].grade*1 + expectPlus) * this.payUnit < limit) {
+        if ((memberList[i].grade * 1 + expectPlus) * this.payUnit < limit) {
           break;
         }
         limitedPersons += memberList[i].count * 1;
       }
       memberList.splice(i + 1, memberList.length - (i + 1));
+      result = limitedPersons * limit;
 
-      return limitedPersons * limit;
+      return result;
     },
-    reBaseMinusMemberList(memberList, expectMinus) {
+    reBaseMinusMember(memberList, expectMinus) {
       let i;
       let result = 0;
       for (i = 0; i < memberList.length; i++) {
