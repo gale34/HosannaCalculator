@@ -15,7 +15,7 @@ export default {
       this.count = count;
     },
     addMember() {
-      this.$store.commit("addMember", new this.Member(0, 0));
+      this.$store.commit("addMember", new this.Member(1, 1));
     }
   }
 };
