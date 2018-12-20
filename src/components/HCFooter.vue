@@ -16,10 +16,6 @@ export default {
     };
   },
   methods: {
-    Member(grade, count) {
-      this.grade = grade;
-      this.count = count;
-    },
     fetch() {
       this.memberList = this.$store.getters.getMemberList.slice(0);
       this.total = this.$store.getters.getTotal;

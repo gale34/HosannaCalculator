@@ -5,17 +5,19 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {};
   },
   methods: {
-    Member(grade, count) {
+    Member (grade, count) {
       this.grade = grade;
       this.count = count;
     },
     addMember() {
-      this.$store.commit("addMember", new this.Member(0, 0));
+      const newMember = new this.Member(0,0);
+      this.$store.commit("addMember", newMember);
     }
   }
 };

@@ -21,10 +21,6 @@ export default {
   created() {
   },
   methods: {
-    Member (grade, count) {
-        this.grade = grade
-        this.count = count
-    },
     removeMember(index) {
         this.$store.commit('removeMember', index)
     }
