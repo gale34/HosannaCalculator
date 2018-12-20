@@ -84,11 +84,6 @@ export default {
           expectPlus += 1;
         }
 
-        console.log(numOfPerson);
-        console.log(margin);
-        console.log(plusUnit);
-        console.log(expectBalance);
-        console.log(expectPlus);
         if (
           (expectPlus + this.getMaxGrade(memberList)) * this.payUnit <=
           limit
@@ -104,7 +99,6 @@ export default {
             expectPlus
           );
           total -= overflow;
-          console.log(overflow);
           //this.calculateWithLimit(memberList, total, limit);
         }
       } else if (margin == 0) {
@@ -185,7 +179,7 @@ export default {
       memberList.forEach(element => {
         if (element.grade * this.payUnit <= limit)
           subTotal += element.grade * element.count * this.payUnit;
-        else subTotal += limit * elemet.count;
+        else subTotal += limit * element.count;
       });
       return subTotal;
     },
@@ -215,21 +209,20 @@ export default {
       let i;
       let limitedPersons = 0;
       for (i = memberList.length - 1; i >= 0; i--) {
-        if ((memberList[i].grde + expectPlus) * this.payUnit < limit) {
+        if ((memberList[i].grade + expectPlus) * this.payUnit < limit) {
           break;
         }
         limitedPersons += memberList[i].count;
       }
       memberList.splice(i + 1, memberList.length - (i + 1));
 
-      console;
       return limitedPersons * limit;
     },
     reBaseMinusMemberList(memberList, expectMinus) {
       let i;
       let result = 0;
       for (i = 0; i < memberList.length; i++) {
-        if (memberList[i].grde - expectMinus >= 0) {
+        if (memberList[i].grade - expectMinus >= 0) {
           break;
         }
         result += memberList[i].grade * memberList[i].count * this.payUnit;
