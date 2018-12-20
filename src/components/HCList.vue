@@ -2,8 +2,8 @@
   <div>
     <ul>
       <li v-for="(member, index) in this.$store.state.memberList" v-bind:key="index" class="shadow">
-        <input type="number" v-model="member.grade" class="inputBox"> 학년
-        <input type="number" v-model="member.count" class="inputBox"> 명
+        <input type="number" v-model.number="member.grade" class="inputBox"> 학년
+        <input type="number" v-model.number="member.count" class="inputBox"> 명
         <span class="removeBtn" @click="removeMember(index)">
             <i class="fas fa-trash-alt"></i>
         </span>
