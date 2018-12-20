@@ -26,6 +26,8 @@ export const store = new Vuex.Store({
     },
     mutations: {
       addMember (state, member) {
+        member.grade *= 1;
+        member.count *= 1;
         state.memberList.push(member);
       },
       changeTotal (state, total) {

@@ -177,7 +177,7 @@ export default {
     getSubTotal(memberList, limit) {
       let subTotal = 0;
       memberList.forEach(element => {
-        if (element.grade * this.payUnit <= limit)
+        if (element.grade * 1 * this.payUnit <= limit)
           subTotal += element.grade * element.count * this.payUnit;
         else subTotal += limit * element.count;
       });
@@ -209,10 +209,10 @@ export default {
       let i;
       let limitedPersons = 0;
       for (i = memberList.length - 1; i >= 0; i--) {
-        if ((memberList[i].grade + expectPlus) * this.payUnit < limit) {
+        if ((memberList[i].grade*1 + expectPlus) * this.payUnit < limit) {
           break;
         }
-        limitedPersons += memberList[i].count;
+        limitedPersons += memberList[i].count * 1;
       }
       memberList.splice(i + 1, memberList.length - (i + 1));
 
