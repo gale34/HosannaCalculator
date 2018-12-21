@@ -43,21 +43,6 @@ li {
   border-radius: 5px;
 }
 
-.checkBtn {
-  line-height: 45px;
-  color: #62acde;
-  margin-right: 5px;
-}
-
-.checkBtnCompleted {
-  color: #b3adad;
-}
-
-.textCompleted {
-  text-decoration: line-through;
-  color: #b3adad;
-}
-
 .removeBtn {
   margin-left: auto;
   color: #de4343;

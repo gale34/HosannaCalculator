@@ -54,16 +54,4 @@ input:focus {
   border-radius: 5px;
 }
 
-.addContainer {
-  float: right;
-  background: linear-gradient(to right, #6478fb, #8763fb);
-  display: block;
-  width: 3rem;
-  border-radius: 0 5px 5px 0;
-}
-
-.addBtn {
-  color: white;
-  vertical-align: middle;
-}
 </style>

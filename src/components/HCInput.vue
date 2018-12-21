@@ -15,10 +15,6 @@ export default {
     return {};
   },
   methods: {
-    //Member (grade, count) {
-    //  this.grade = grade;
-    //  this.count = count;
-    //},
     addMember() {
       const newMember = new Member(0, 0);
       this.$store.commit("addMember", newMember);
