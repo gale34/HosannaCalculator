@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="calculate()">계산</button>
+    <v-btn color="success" @click="calculate">계산</v-btn>
   </div>
 </template>
 
