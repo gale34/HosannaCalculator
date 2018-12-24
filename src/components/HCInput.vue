@@ -1,18 +1,17 @@
 <template>
   <div>
-    <v-fab-transition>
+<!--    <v-fab-transition>
       <v-btn
           color="blue darken-3"
           dark
           fab
           right
-          bottom
-          fixed
+          absolute
           @click="addMember"
       >
         <v-icon>add</v-icon>
       </v-btn>
-    </v-fab-transition>
+    </v-fab-transition>-->
   </div>
 </template>
 

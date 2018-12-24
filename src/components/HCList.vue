@@ -20,10 +20,27 @@
         </v-layout>
       </li>
     </ul>
+    <v-fab-transition>
+      <v-btn
+          color="blue darken-3"
+          dark
+          fab
+          right
+          absolute
+          @click="addMember"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </v-container>
 </template>
 
 <script>
+  function Member(grade, count) {
+    this.grade = grade;
+    this.count = count;
+  }
+
   export default {
     data() {
       return {};
@@ -31,6 +48,10 @@
     created() {
     },
     methods: {
+      addMember() {
+        const newMember = new Member(0, 0);
+        this.$store.commit("addMember", newMember);
+      },
       removeMember(index) {
         this.$store.commit('removeMember', index)
       }
