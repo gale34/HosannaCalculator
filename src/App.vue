@@ -6,7 +6,6 @@
         <HCDefaultInput></HCDefaultInput>
         <v-divider></v-divider>
         <HCList></HCList>
-        <HCInput></HCInput>
         <v-divider></v-divider>
         <HCFooter></HCFooter>
       </v-content>
@@ -17,7 +16,6 @@
 <script>
   import HCHeader from './components/HCHeader.vue'
   import HCDefaultInput from './components/HCDefaultInput.vue'
-  import HCInput from './components/HCInput.vue'
   import HCList from './components/HCList.vue'
   import HCFooter from './components/HCFooter.vue'
 
@@ -26,7 +24,6 @@
     components: {
       HCHeader,
       HCDefaultInput,
-      HCInput,
       HCList,
       HCFooter
     }
